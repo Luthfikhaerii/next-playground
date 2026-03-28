@@ -6,10 +6,10 @@ test("button click works", () => {
     // mock event
     const handleClick = jest.fn();
 
-    // render button
+    // scenario render button
     render(<Button onClick={handleClick} />);
 
-    // even triger
+    // scenario even triger
     const btn = screen.getByText("Click Me");
     fireEvent.click(btn);
 

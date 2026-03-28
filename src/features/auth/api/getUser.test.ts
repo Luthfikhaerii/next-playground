@@ -1,13 +1,18 @@
 import { getUser } from "./getUser";
 
-global.fetch = jest.fn(() =>
-  Promise.resolve({
-    json: () => Promise.resolve({ name: "John" }),
-  })
-) as jest.Mock;
+describe("getUser",() => {
+    beforeEach(() => {
+        jest.clearAllMocks()
+        global.fetch = jest.fn()
+    })
 
-test("fetchUser returns data", async () => {
-  const data = await getUser();
+    it("should success return data", async () => {
+        (fetch as jest.Mock).mockResolvedValueOnce({
+            json: async () => ({ name: "luthfi" })
+        })
 
-  expect(data.name).toBe("John");
-});
+        const data = await getUser()
+
+        expect(data).toEqual({ name: "luthfi" })
+    })
+})

@@ -10,5 +10,5 @@ test("input updates correctly", () => {
     target: { value: "test@mail.com" },
   });
 
-  expect(screen.getByText("test@mail.com")).toBeInTheDocument();
+  expect(screen.getByText("test@mail.com")).not.toBeNull();
 });
