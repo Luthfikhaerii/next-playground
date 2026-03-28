@@ -11,7 +11,7 @@ describe("useFetch", () => {
 
     it("should fetch data success", async () => {
         // init mock & return apa
-        (fetch as jest.Mock).mockResolvedValueOnce({
+        (global.fetch as jest.Mock).mockResolvedValueOnce({
             json: async () => ({ name: "luthfi" })
         })
 
@@ -27,12 +27,12 @@ describe("useFetch", () => {
     })
 
     it("should handle error", async () => {
-        (fetch as jest.Mock).mockRejectedValueOnce(new Error("api Error"))
+        (global.fetch as jest.Mock).mockRejectedValueOnce(new Error("api Error"))
 
-        const {result} = renderHook(()=> useFetch("/user"))
+        const { result } = renderHook(() => useFetch("/user"))
 
 
-        await waitFor(()=>{
+        await waitFor(() => {
             expect(result.current.error).toBeTruthy()
         })
         expect(result.current.data).toBe(null)
@@ -46,7 +46,7 @@ describe("useFetch", () => {
             resolvePromise = res
         })
 
-            ; (fetch as jest.Mock).mockReturnValueOnce(promise)
+        ;(global.fetch as jest.Mock).mockReturnValueOnce(promise)
 
         // Act
         const { result } = renderHook(() => useFetch("/users"))
