@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Geist, Poppins } from "next/font/google";
 import localFont from "next/font/local";
 import "./globals.css";
+import ReactQueryProvider from "@/components/providers/react-query-provider";
 
 const poppins = Poppins({
   subsets: ["latin"],
@@ -26,7 +27,7 @@ export const metadata = {
     template: "%s | Next Playground",
   },
   description: "Project Next.js Untuk belajar",
-  
+
   openGraph: {
     title: "My Website",
     description: "Belajar digital marketing & teknologi",
@@ -58,7 +59,9 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${poppins.variable} ${barriecito.variable} antialiased`}
       >
-        {children}
+        <ReactQueryProvider>
+          {children}
+        </ReactQueryProvider>
       </body>
     </html>
   );
